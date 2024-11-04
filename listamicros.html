@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Materiales - Microcontroladores y Microprocesadores</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome (for icons) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f5f5f5;
+            color: #2a2185;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .table th {
+            background-color: #2a2185;
+            color: white;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .status-not-purchased {
+            background-color: #d9534f;
+        }
+        .status-partial {
+            background-color: #f0ad4e;
+        }
+        .status-complete {
+            background-color: #5cb85c;
+        }
+        .photo {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 2px solid #2a2185;
+            cursor: pointer;
+        }
+        
+        /* Modal overlay */
+        .modal-overlay {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro semitransparente */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* Imagen modal */
+        .modal-overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center"><i class="fas fa-clipboard-list"></i> Lista de Materiales - Microcontroladores y Microprocesadores</h1>
+
+    <div class="table-container">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th></i> Precio</th>
+                    <th>Módulo/Pieza</th>
+                    <th>Piezas</th>
+                    <th>Comprado</th>
+                    <th>Comprado por</th>
+                    <th>Imagen de Referencia</th>
+                    <th><i class="fas fa-check-circle"></i> Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Microcontrolador Arduino Uno</td>
+                    <td>Bs 80.00</td>
+                    <td>Brazo 2</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/arduinoUno.webp" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Microcontrolador Arduino Mega</td>
+                    <td>Bs 163.00</td>
+                    <td>Brazo 1</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>Nadie</td>
+                    <td><img src="assets/imgs/listaMateriales/arduinoMega.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-not-purchased"><i class="fas fa-times-circle"></i>Incompleto</span></td>
+                </tr>
+                <tr>
+                    <td>Microcontrolador Esp32</td>
+                    <td>Bs 80.00</td>
+                    <td>Cintas, cortadora, lavadora, extrusora</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>Nadie</td>
+                    <td><img src="assets/imgs/listaMateriales/esp32x30pines.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-not-purchased"><i class="fas fa-times-circle"></i>Incompleto</span></td>
+                </tr>
+                <tr>
+                    <td>Microcontrolador Esp32</td>
+                    <td>Bs 80.00</td>
+                    <td>Controlador principal</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>Nadie</td>
+                    <td><img src="assets/imgs/listaMateriales/esp32x30pines.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-not-purchased"><i class="fas fa-times-circle"></i>Incompleto</span></td>
+                </tr>
+                <tr>
+                    <td>Servomotor MG966R</td>
+                    <td>Bs 58.00</td>
+                    <td>Brazo 2</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/mg966r.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Servomotor MG966R</td>
+                    <td>Bs 58.00</td>
+                    <td>Brazo 1</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>Nadie</td>
+                    <td><img src="assets/imgs/listaMateriales/mg966r.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-not-purchased"><i class="fas fa-times-circle"></i>Incompleto</span></td>
+                </tr>
+                <tr>
+                    <td>Motor Nema17 34mm</td>
+                    <td>Bs 120</td>
+                    <td>Brazo 1</td>
+                    <td>6</td>
+                    <td>5</td>
+                    <td>Edson</td>
+                    <td><img src="assets/imgs/listaMateriales/nema17x34mm.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-not-purchased"><i class="fas fa-times-circle"></i>Incompleto</span></td>
+                </tr>
+                <tr>
+                    <td>Motor Nema17 40mm (Miguel 100bs, edson 20bs)</td>
+                    <td>Bs 120</td>
+                    <td>Brazo 1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Edson y Miguel</td>
+                    <td><img src="assets/imgs/listaMateriales/nema17x40mm.webp" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Nema17 42mm 4kg/cm</td>
+                    <td>Bs 99.00</td>
+                    <td>Brazo 2</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/nema17 42mm.avif" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Nema17 33mm 1.3kg/cm</td>
+                    <td>Bs 95.00</td>
+                    <td>Brazo 2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/nema17 33mm.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Nema17 22mm</td>
+                    <td>Bs 115.00</td>
+                    <td>Brazo 2</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/nema17 22mm.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Nema17 4kg/cm</td>
+                    <td>Bs 99.00</td>
+                    <td>cortadora</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>Nadie</td>
+                    <td><img src="assets/imgs/listaMateriales/nema17 42mm.avif" class="photo" alt=""></td>
+                    <td><span class="status-badge status-not-purchased"><i class="fas fa-times-circle"></i>Incompleto</span></td>
+                </tr>
+                <tr>
+                    <td>Driver de Motor nema A4988</td>
+                    <td>Bs 19.00</td>
+                    <td>Brazo 1</td>
+                    <td>6</td>
+                    <td>5</td>
+                    <td>Miguel</td>
+                    <td><img src="assets/imgs/listaMateriales/a4988.webp" class="photo" alt=""></td>
+                    <td><span class="status-badge status-not-purchased"><i class="fas fa-times-circle"></i>Incompleto</span></td>
+                </tr>
+                <tr>
+                    <td>Driver de Motor nema A4988</td>
+                    <td>Bs 19.00</td>
+                    <td>Brazo 2</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/a4988.webp" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Shield CNC Arduino</td>
+                    <td>Bs 29.00</td>
+                    <td>Brazo 2</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/shieldCNC.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Cortado de madera</td>
+                    <td>Bs 40.00</td>
+                    <td>Brazo 1,2 cortador, citas</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/maderacortado.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Madera Prensada</td>
+                    <td>Bs 300.00</td>
+                    <td>Brazo 1,2 cortador, citas</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/madera.avif" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Impresion 3D</td>
+                    <td>Bs 340.75</td>
+                    <td>brazo 1,2, cinta, cortadora</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/3d.png" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Impresion 3D</td>
+                    <td>Bs 340.75</td>
+                    <td>brazo 1,2, cinta, cortadora</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Miguel</td>
+                    <td><img src="assets/imgs/listaMateriales/3d.png" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Impresion 3D</td>
+                    <td>Bs 340.75</td>
+                    <td>brazo 1,2, cinta, cortadora</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Sergio</td>
+                    <td><img src="assets/imgs/listaMateriales/3d.png" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Impresion 3D</td>
+                    <td>Bs 340.75</td>
+                    <td>brazo 1,2, cinta, cortadora</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Edson</td>
+                    <td><img src="assets/imgs/listaMateriales/3d.png" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Impresion 3D piezas faltantes</td>
+                    <td>Bs 84.00</td>
+                    <td>brazo 1,2</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/3d.png" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Caja reductora</td>
+                    <td>Bs 300.00</td>
+                    <td>brazo 1</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>Nadie</td>
+                    <td><img src="assets/imgs/listaMateriales/cajaReductora.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-not-purchased"><i class="fas fa-times-circle"></i>Incompleto</span></td>
+                </tr>
+                <tr>
+                    <td>Husillo trapezoidal T8 6Hilo</td>
+                    <td>Bs 80.00</td>
+                    <td>brazo 2</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/huesillo.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Motorreductor JGB37</td>
+                    <td>Bs 108.00</td>
+                    <td>Cintas</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/motoreductor12v.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-not-purchased"><i class="fas fa-times-circle"></i>Incompleto</span></td>
+                </tr>
+                <tr>
+                    <td>Tensor de polea gt2</td>
+                    <td>Bs 16.00</td>
+                    <td>brazo 2</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/tensor gt2.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Tensor de polea gt2</td>
+                    <td>Bs 18.00</td>
+                    <td>brazo 2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/rueda.webp" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Tensor de polea con dientesgt2</td>
+                    <td>Bs 17.00</td>
+                    <td>brazo 2</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/tensor con dientes gt2.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Acople Flexible 5 x 8mm</td>
+                    <td>Bs 20.00</td>
+                    <td>brazo 2</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/acople.png" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>KP08 Cojinete de rodamiento</td>
+                    <td>Bs 22.00</td>
+                    <td>cintas</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/KP08 Cojinete de rodamiento.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-not-purchased"><i class="fas fa-times-circle"></i>Incompleto</span></td>
+                </tr>
+                <tr>
+                    <td>Pernos</td>
+                    <td>Bs 70.00</td>
+                    <td>brazo 2</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/pernos.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>  
+                <tr>
+                    <td>Rodamento Lineal</td>
+                    <td>Bs 17.00</td>
+                    <td>brazo 2</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/rodamentoLinial.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr> 
+                <tr>
+                    <td>Rodamento 608z</td>
+                    <td>Bs 8.00</td>
+                    <td>brazo 2</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/rodamento608.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>  
+                <tr>
+                    <td>Cuero de auto</td>
+                    <td>Bs 40.00</td>
+                    <td>Cintas</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/cuero.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>perno de 13mmx300mm</td>
+                    <td>Bs 20.00</td>
+                    <td>Cintas</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/perno13x300.webp" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Pernos (bs100 edson bs16 sergio)</td>
+                    <td>Bs 116.00</td>
+                    <td>Brazo 1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Edson y sergio</td>
+                    <td><img src="assets/imgs/listaMateriales/pernos.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Pernos</td>
+                    <td>Bs 15.00</td>
+                    <td>Cintas</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/pernos.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Esp32cam+quemador</td>
+                    <td>Bs 110.00</td>
+                    <td>Brazo 1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>edson</td>
+                    <td><img src="assets/imgs/listaMateriales/esp32cam.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>Esp32cam</td>
+                    <td>Bs 90.00</td>
+                    <td>Brazo 2</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/esp32cam.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+                <tr>
+                    <td>quemador Esp32cam</td>
+                    <td>Bs 20.00</td>
+                    <td>Brazo 2</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Froilan</td>
+                    <td><img src="assets/imgs/listaMateriales/quemador.jpg" class="photo" alt=""></td>
+                    <td><span class="status-badge status-complete"><i class="fas fa-check-circle"></i> Completo</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="modal-overlay" id="modal-overlay">
+    <img id="modal-image" src="" alt="Imagen ampliada">
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.querySelectorAll('.photo').forEach(img => {
+        img.addEventListener('click', (e) => {
+            const modalOverlay = document.getElementById('modal-overlay');
+            const modalImage = document.getElementById('modal-image');
+            modalImage.src = e.target.src; 
+            modalOverlay.style.display = 'flex'; 
+        });
+    });
+    document.getElementById('modal-overlay').addEventListener('click', () => {
+        document.getElementById('modal-overlay').style.display = 'none';
+    });
+</script>
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas por Hacer</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome (for icons) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <!-- Chart.js (for chart) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            background-color: #f5f5f5;
+            color: #2a2185;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .reseña {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: #444;
+        }
+
+        .table-container, .chart-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .table th {
+            background-color: #2a2185;
+            color: white;
+        }
+
+        .table-chart {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .chart-container {
+            width: 45%;
+        }
+
+        .table-container {
+            width: 50%;
+        }
+
+        /* Estado Colors */
+        .estado-pendiente {
+            background-color: #f8d7da; /* Light red */
+            color: #721c24;
+        }
+
+        .estado-en-progreso {
+            background-color: #fff3cd; /* Light yellow */
+            color: #856404;
+        }
+
+        .estado-completado {
+            background-color: #d4edda; /* Light green */
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lista de Tareas por Hacer</h1>
+
+    <div class="reseña">
+        <p>Esta es una lista de tareas asignadas a los integrantes del equipo.</p>
+    </div>
+
+    <div class="table-chart">
+        <!-- Table Container -->
+        <div class="table-container">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-book"></i> Materia</th>
+                        <th><i class="fas fa-align-left"></i> Descripción</th>
+                        <th><i class="fas fa-user"></i> Asignado a</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>    
+                        <td>Embebidos</td>
+                        <td>Armar la prótesis: juntar todas las partes impresas en 3D y ensamblar los motores MG966R en sus posiciones respectivas, asegurando que estén firmemente instalados para soportar el movimiento de cada articulación.</td>
+                        <td class="assigned">Froilan</td>
+                    </tr>
+                    <tr>
+                        <td>Embebidos</td>
+                        <td>Programar la lógica del driver para generar la señal PWM que controlará los servomotores, ajustando parámetros como la frecuencia y el ciclo de trabajo, para obtener movimientos suaves y precisos en cada motor.</td>
+                        <td class="assigned">Froilan</td>
+                    </tr>
+                    <tr>
+                        <td>Embebidos</td>
+                        <td>Programar la lógica de lectura del sensor EMG para captar correctamente las señales musculares, procesar los datos de voltaje y adaptarlos para ser interpretados por el microcontrolador como órdenes de movimiento.</td>
+                        <td class="assigned">Froilan</td>
+                    </tr>
+                    <tr>
+                        <td>Embebidos</td>
+                        <td>Programar la lógica de manejo del sensor EMG para que controle la señal PWM de cada servomotor, traduciendo la fuerza y duración de la señal EMG en movimientos específicos, permitiendo que el usuario controle la prótesis con sus músculos.</td>
+                        <td class="assigned">Froilan</td>
+                    </tr>
+                    <tr>
+                        <td>Embebidos</td>
+                        <td>Realizar el informe final de la materia: documentar de forma detallada todos los aspectos del proyecto, incluyendo objetivos, metodología, resultados obtenidos y conclusiones. Asegurarse de incluir gráficos, tablas y referencias adecuadas para respaldar la información presentada.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Embebidos</td>
+                        <td>Realizar diapositivas para exponer en la feria: crear una presentación visual atractiva y clara que resuma el proyecto. Incluir puntos clave como el propósito, la metodología, los principales logros, y las aplicaciones prácticas, manteniendo el diseño visualmente coherente y profesional.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Embebidos</td>
+                        <td>Realizar tríptico para la feria: diseñar un folleto informativo que explique el proyecto de manera concisa y accesible para el público general. Incluir secciones como la descripción del proyecto, beneficios, aplicaciones, e imágenes representativas para captar la atención de los asistentes.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Realizar el brazo robótico de 6 ejes: ensamblar todas las piezas impresas en 3D, instalar los motores NEMA17, los sensores y otros componentes necesarios, asegurando que todas las partes estén correctamente alineadas y conectadas para el funcionamiento adecuado del brazo.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Realizar la programación para el funcionamiento de los motores NEMA17 y el servomotor MG966R: configurar la lógica de movimiento de cada eje, ajustando la señal de control y los tiempos de desplazamiento para que el brazo ejecute movimientos precisos y coordinados.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Diseñar la placa de control para los drivers de los motores y los sensores: crear el esquema eléctrico y layout de la PCB, asegurando que soporte las corrientes de los motores NEMA17 y que permita la correcta comunicación con los sensores.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Diseñar la interfaz gráfica de control: desarrollar una GUI intuitiva que permita al usuario interactuar con el brazo, ajustando los movimientos y supervisando el estado de cada componente de forma visual y fácil de usar.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Programar la lógica de funcionamiento del brazo de 6 ejes: escribir el código que controle cada movimiento del brazo en función de los comandos recibidos y las señales de los sensores, garantizando una respuesta precisa a las órdenes de posición.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Programar la visión artificial para la clasificación de botellas: desarrollar un algoritmo que permita al sistema reconocer y clasificar botellas en buen estado y botellas con abolladuras o daños, utilizando la cámara y el software de visión artificial.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Programar la lógica de manejo de la visión artificial con el brazo de 6 ejes: integrar la clasificación de botellas con los movimientos del brazo, de modo que pueda seleccionar y mover las botellas de acuerdo a la categoría detectada.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Programar la lógica para que la interfaz gráfica maneje al brazo de 6 ejes de forma manual: permitir que el usuario controle manualmente cada eje del brazo a través de la GUI, habilitando movimientos precisos y supervisados.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Ensamblar las dos cintas restantes: cortar las piezas de madera, unirlas con pernos, instalar los motores y las piezas impresas en 3D, y asegurar que el sistema de transporte esté alineado y funcione correctamente.</td>
+                        <td class="assigned">Froilan</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Ensamblar la cortadora de botellas: montar los componentes de corte, asegurando la estabilidad y precisión del mecanismo para realizar cortes limpios y seguros en las botellas.</td>
+                        <td class="assigned">Froilan</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Ensamblar la lavadora de botellas: unir las piezas y montar los motores, bombas, y otros elementos de limpieza, garantizando el flujo de agua y la capacidad de lavado uniforme de las botellas.</td>
+                        <td class="assigned">Froilan</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Programar la lógica de control para las cintas, lavadora, secadora, extrusora y lavadora de botellas: diseñar el código que coordine el funcionamiento de cada componente, sincronizando el flujo de botellas en cada etapa del proceso.</td>
+                        <td class="assigned">Froilan</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Ensamblar el brazo robótico de 4 ejes: unir todas las piezas impresas, instalar los motores NEMA y asegurarse de que cada eje esté correctamente alineado y ajustado para los movimientos requeridos.</td>
+                        <td class="assigned">Froilan</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Programar la lógica de control del brazo de 4 ejes: escribir el código que permita mover cada eje en función de las señales de control, asegurando precisión en los movimientos y estabilidad en las posiciones.</td>
+                        <td class="assigned">Froilan</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Programar la interfaz de control manual para el brazo de 4 ejes: crear una GUI que permita al usuario controlar manualmente cada eje del brazo, habilitando ajustes precisos para cada movimiento.</td>
+                        <td class="assigned">Froilan</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Programar el control del brazo de 4 ejes mediante la interfaz de control manual: implementar la lógica que permita ejecutar los comandos de la GUI en tiempo real, permitiendo al usuario manipular el brazo con precisión.</td>
+                        <td class="assigned">Froilan</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Programar la visión artificial para el segundo brazo: desarrollar la lógica de detección de objetos que permita identificar y clasificar elementos específicos, optimizando el reconocimiento para el segundo brazo robótico.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Programar el control de la visión artificial para el brazo 2: integrar el sistema de visión artificial con el control del brazo, para que pueda manipular los objetos detectados de acuerdo a la clasificación establecida.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Programar el control de la visión artificial para el brazo 2: integrar el sistema de visión artificial con el control del brazo, para que pueda manipular los objetos detectados de acuerdo a la clasificación establecida.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Creación del sistema de control y telemetría: diseñar la arquitectura y desarrollar el software que permita monitorear y registrar datos en tiempo real sobre el estado de cada componente del sistema.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Creación del sistema de control SCADA: desarrollar un sistema SCADA que permita la supervisión y control de todos los componentes, visualizando datos de telemetría y estado en un panel centralizado para el usuario.</td>
+                        <td class="assigned">Froilan</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Programar la lógica de conexión al sistema SCADA: desarrollar la interfaz y lógica de comunicación que permita la conexión del sistema central con el SCADA, asegurando una respuesta rápida y una visualización clara del estado del sistema.</td>
+                        <td class="assigned">Froilan</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Programar la lógica de conexión al sistema de telemetría: implementar el protocolo de comunicación que permita al sistema central recibir y enviar datos de telemetría de forma estable y en tiempo real.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Programación del sistema central para controlar todo el proceso: integrar todas las funciones en un único sistema de control, asegurando que los brazos robóticos, cintas transportadoras y otros dispositivos funcionen de manera coordinada.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Realizar el informe final de la materia: documentar de forma detallada todos los aspectos del proyecto, incluyendo objetivos, metodología, resultados obtenidos y conclusiones. Asegurarse de incluir gráficos, tablas y referencias adecuadas para respaldar la información presentada.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Realizar diapositivas para exponer en la feria: crear una presentación visual atractiva y clara que resuma el proyecto. Incluir puntos clave como el propósito, la metodología, los principales logros, y las aplicaciones prácticas, manteniendo el diseño visualmente coherente y profesional.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroladores</td>
+                        <td>Realizar tríptico para la feria: diseñar un folleto informativo que explique el proyecto de manera concisa y accesible para el público general. Incluir secciones como la descripción del proyecto, beneficios, aplicaciones, e imágenes representativas para captar la atención de los asistentes.</td>
+                        <td class="assigned">Asignado a Nadie</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Chart Container -->
+        <div class="chart-container">
+            <canvas id="taskChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Chart.js Script for Chart -->
+    <script>
+        // Set the names dynamically
+        const names = ["Froilan", "Daner", "Sergio", "Edson", "Asignado a Nadie"];
+        
+        // Initialize chart
+        const ctx = document.getElementById('taskChart').getContext('2d');
+        const taskChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: names,
+                datasets: [{
+                    label: 'Tareas Asignadas',
+                    data: calculateTaskDistribution(),
+                    backgroundColor: ['#4a90e2', '#50e3c2', '#7ed321', '#f5a623', '#d0021b'],
+                    borderColor: ['#4a90e2', '#50e3c2', '#7ed321', '#f5a623', '#d0021b'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return names[tooltipItem.dataIndex] + ': ' + tooltipItem.raw + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Function to calculate the distribution of tasks for the chart
+        function calculateTaskDistribution() {
+            const assignedCells = Array.from(document.querySelectorAll('.assigned'));
+            const count = names.map(name => assignedCells.filter(cell => cell.innerText === name).length);
+            const total = count.reduce((a, b) => a + b, 0);
+            return count.map(c => total ? (c / total * 100).toFixed(2) : 0);
+        }
+
+        // Update chart and status color
+        document.querySelectorAll('.estado').forEach(cell => {
+            cell.addEventListener('input', () => {
+                taskChart.data.datasets[0].data = calculateTaskDistribution();
+                taskChart.update();
+                updateStatusColors();
+            });
+        });
+
+        // Function to apply colors based on task status
+        function updateStatusColors() {
+            document.querySelectorAll('.estado').forEach(cell => {
+                const status = cell.innerText.trim().toLowerCase();
+                cell.classList.remove('estado-pendiente', 'estado-en-progreso', 'estado-completado');
+                
+                if (status === 'pendiente') {
+                    cell.classList.add('estado-pendiente');
+                } else if (status === 'en progreso') {
+                    cell.classList.add('estado-en-progreso');
+                } else if (status === 'completado') {
+                    cell.classList.add('estado-completado');
+                }
+            });
+        }
+
+        // Initial call to set colors on page load
+        updateStatusColors();
+    </script>
+
+</body>
+</html>

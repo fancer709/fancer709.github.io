@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Microcontroladores y Embebidos</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        iframe {
+            width: 100%;
+            height: calc(100vh - 100px);
+            border: none;
+            background-color: transparent;
+        }
+        .main-content {
+            padding: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="school-outline"></ion-icon>
+                        </span>
+                        <span class="title">Unifranz</span>
+                    </a>                    
+                </li>
+
+                <li>
+                    <a href="#" onclick="loadPage('informeGeneral.html')">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Informe General</span> 
+                    </a>
+                </li>                
+
+                <li>
+                    <a href="#" onclick="loadPage('informeEconomico.html')">
+                        <span class="icon">
+                            <ion-icon name="cash-outline"></ion-icon>
+                        </span>
+                        <span class="title">Informe Económico</span> 
+                    </a>
+                </li>                
+
+                <li>
+                    <a href="#" onclick="loadPage('listaMateriales.html')">
+                        <span class="icon">
+                            <ion-icon name="document-text-outline"></ion-icon>
+                        </span>
+                        <span class="title">Lista de Materiales</span> 
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="loadPage('asignacionTareas.html')">
+                        <span class="icon">
+                            <ion-icon name="clipboard-outline"></ion-icon>
+                        </span>
+                        <span class="title">Asignación de Tareas</span> 
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="loadPage('progresoTareas.html')">
+                        <span class="icon">
+                            <ion-icon name="bar-chart-outline"></ion-icon>
+                        </span>
+                        <span class="title">Progreso de Tareas</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="loadPage('desempenoEquipo.html')">
+                        <span class="icon">
+                            <ion-icon name="people-circle-outline"></ion-icon>
+                        </span>
+                        <span class="title">Desempeño del Equipo</span> 
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="loadPage('salir.html')">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Salir</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="search">
+                    <label>
+                        <input type="text" placeholder="Buscar.....">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </label>
+                </div>
+
+                <div class="user">
+                    <img src="assets/imgs/unifranz.png" alt="">
+                </div>
+            </div>
+
+            <div class="main-content">
+                <iframe id="contentFrame" src="informeGeneral.html"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/cargarContenido.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

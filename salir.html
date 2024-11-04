@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salir del Sitio</title>
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Estilos del cuadro de diálogo */
+        .dialog-container {
+            text-align: center;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .dialog-container h1 {
+            font-size: 1.8rem;
+            color: #2a2185;
+            margin-bottom: 20px;
+        }
+
+        .dialog-container p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* Estilos de los botones */
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #2a2185;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .buttons button:hover {
+            background-color: #1d1763;
+        }
+
+        .buttons button.cancel {
+            background-color: #888888;
+        }
+
+        .buttons button.cancel:hover {
+            background-color: #666666;
+        }
+    </style>
+</head>
+<body>
+    <div class="dialog-container">
+        <h1>¿Abandonar el sitio?</h1>
+        <p>Estás a punto de salir de esta página. ¿Estás seguro de que quieres continuar?</p>
+        <div class="buttons">
+            <button onclick="closeWindow()">Sí, salir</button>
+            <button class="cancel" onclick="goBack()">No, volver</button>
+        </div>
+    </div>
+
+    <script>
+        // Intenta cerrar la ventana
+        function closeWindow() {
+            window.open('', '_self').close();
+            
+            // Verifica si la ventana se cerró; si no, muestra un mensaje al usuario
+            setTimeout(function() {
+                if (!window.closed) {
+                    alert("No se puede cerrar la pestaña automáticamente. Por favor, ciérrala manualmente.");
+                }
+            }, 200);
+        }
+
+        // Redirige de nuevo a informeGeneral.html
+        function goBack() {
+            window.location.href = 'informeGeneral.html';
+        }
+    </script>
+</body>
+</html>
